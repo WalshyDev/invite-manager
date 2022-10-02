@@ -1,5 +1,5 @@
 import { createHandler } from "slshx";
-import invite from "./invite";
+import { inviteDisable, inviteEnable, inviteUsage } from "./invite";
 
 const handler = createHandler({
 	// Replaced by esbuild when bundling, see scripts/build.js (do not edit)
@@ -9,7 +9,11 @@ const handler = createHandler({
 	testServerId: SLSHX_TEST_SERVER_ID,
 
 	commands: {
-		invite,
+		invite: {
+			enable: inviteEnable,
+			disable: inviteDisable,
+			usage: inviteUsage,
+		}
 	},
 });
 
