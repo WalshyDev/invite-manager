@@ -1,5 +1,5 @@
 # Invite manager
-## As small bot built on [Cloudfare workers](https://workers.dev/) for [Cloudfare discord](https://discord.gg/cloudflaredev)
+## A small bot built on [Cloudfare workers](https://workers.dev/) for [Cloudfare discord](https://discord.gg/cloudflaredev)
 
 Built using [```SLSHX```](https://github.com/mrbbot/slshx) library
 
