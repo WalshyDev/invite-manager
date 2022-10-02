@@ -1,0 +1,20 @@
+{
+	"name": "slshx-starter",
+	"version": "1.0.0",
+	"type": "module",
+	"module": "dist/index.mjs",
+	"license": "MIT",
+	"scripts": {
+		"dev": "miniflare --watch --debug --wrangler-env=development",
+		"deploy:global": "node --no-warnings --experimental-vm-modules scripts/deploy.js"
+	},
+	"dependencies": {
+		"slshx": "^0.3.0"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^3.3.0",
+		"esbuild": "^0.14.8",
+		"miniflare": "^2.9.0",
+		"wrangler": "^2.1.0"
+	}
+}
