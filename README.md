@@ -1,5 +1,22 @@
-# Invite Manager
+# Invite manager
+## As small bot built on [Cloudfare workers](https://workers.dev/) for [Cloudfare discord](https://discord.gg/cloudflaredev)
 
-Small bot built on [Cloudflare Workers](https://workers.dev) for the [Cloudflare Discord](https://discord.gg/cloudflaredev). Built with the [Slshx](https://github.com/mrbbot/slshx) library.
+Built using [```SLSHX```](https://github.com/mrbbot/slshx) library
 
-This bot is made to manage invite control. It allows mods to disable + enable invites along with seeing usage. This is very helpful for raids, you can block more bots joining while the mods get the situation under control.
+## Features
+
+- Manages invite control
+- Enables mods to disable and enable invites along with seeing usage
+- Very helpful for raids
+- Can block more bots joining while the mods get the situation under control
+
+## Tech
+
+Invite manager uses:
+
+- ```Javascript```
+- ```Typescript```
+
+
+And of course Invite manager itself is open source with a [public repository](https://github.com/WalshyDev/invite-manager)
+ on GitHub.
