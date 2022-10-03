@@ -6,7 +6,7 @@ import {
 	useString,
 	useDefaultPermission,
 } from "slshx";
-import { disableInvites, enableInvites, getInviteUsage, getVanityInvite } from './api';
+import { deleteInvite, disableInvites, enableInvites, getInviteUsage, getVanityInvite } from './api';
 
 export function inviteEnable(): CommandHandler<Env> {
 	useDescription("Enable invites");
@@ -58,6 +58,33 @@ export function inviteDisable(): CommandHandler<Env> {
 	}
 }
 
+export function inviteDelete(): CommandHandler<Env> {
+	useDescription("Delete an invite");
+	useDefaultPermission(false);
+
+	const code = useString("code", "Invite code", { required: true });
+
+	return async (interaction, env) => {
+		if (!interaction.guild_id) {
+			return <Message ephemeral>
+				This command can only be ran in a server!
+			</Message>;
+		}
+
+		const resp = await deleteInvite(env, interaction.guild_id, code);
+
+		if (resp.success) {
+			return <Message>
+				Deleted the invite with the code {code}!
+			</Message>;
+		} else {
+			return <Message>
+				Failed to delete invite! Error: {typeof resp.error === 'object' ? JSON.stringify(resp.error) : resp.error}
+			</Message>
+		}
+	}
+}
+
 export function inviteUsage(): CommandHandler<Env> {
 	useDescription("Invite usage");
 	useDefaultPermission(false);
@@ -74,7 +101,7 @@ export function inviteUsage(): CommandHandler<Env> {
 
 		if (!resp.success) {
 			return <Message>
-				Failed to disable invites! Error: {typeof resp.error === 'object' ? JSON.stringify(resp.error) : resp.error}
+				Failed to fetch invites! Error: {typeof resp.error === 'object' ? JSON.stringify(resp.error) : resp.error}
 			</Message>
 		}
 		if (!resp.result) {

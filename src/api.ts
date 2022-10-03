@@ -2,6 +2,10 @@ export function getGuild(env: Env, guildId: string): Promise<ApiResponse<Guild>>
 	return api<Guild>(env, `/guilds/${guildId}`);
 }
 
+export function getInvite(env: Env, code: string): Promise<ApiResponse<Invite>> {
+	return api<Invite>(env, `/invites/${code}`);
+}
+
 export function patchGuild(env: Env, guildId: string, update: GuildUpdate): Promise<ApiResponse<Guild>> {
 	return api<Guild>(env, `/guilds/${guildId}`, {
 		method: 'PATCH',
@@ -43,6 +47,22 @@ export async function disableInvites(env: Env, guildId: string): Promise<ApiResp
 	features.push('INVITES_DISABLED');
 
 	return patchGuild(env, guildId, { features });
+}
+
+export async function deleteInvite(env: Env, guildId: string, code: string): Promise<ApiResponse<Invite>> {
+	const resp = await getInvite(env, code);
+
+	if (!resp.success) {
+		return resp;
+	}
+
+	if(resp.result?.guild?.id !== guildId) {
+		return { success: false, error: "The invite does not belong to this server" };
+	}
+
+	return api<Invite>(env, `/invites/${code}`, {
+		method: 'DELETE',
+	});
 }
 
 export function getInviteUsage(env: Env, guildId: string): Promise<ApiResponse<InviteWithMetadata[]>> {
